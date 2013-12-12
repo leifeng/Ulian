@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no, email=no">
+    <link rel="stylesheet" href="css/jquery.mobile.flatui.css"/>
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script src="js/jquery.mobile-1.3.2.min.js"></script>
+    <script src="js/base64.js"></script>
+    <script src="js/tool.js"></script>
+</head>
+<body>
+<!-- Home -->
+<div data-role="page" id="page1">
+    <div data-theme="" data-role="header">
+        <a href="index.html" rel="external">首页</a>
+
+        <h3>
+            新用户注册
+        </h3>
+        <a href="login.html" rel="external">登录</a>
+    </div>
+    <div data-role="content">
+        <div data-role="fieldcontain">
+            <input name="" id="phone" placeholder="手机号码" value="" type="text">
+        </div>
+        <input type="submit" data-theme="b" value="获取验证码" data-mini="true" id="getcode">
+
+        <div data-role="fieldcontain">
+            <input name="" id="code" placeholder="验证码" value="" type="text">
+        </div>
+        <div data-role="fieldcontain">
+            <input name="" id="nick" placeholder="昵称" value="" type="text">
+        </div>
+        <div data-role="fieldcontain">
+            <input name="" id="pw1" placeholder="密码" value="" type="password">
+        </div>
+        <div data-role="fieldcontain">
+            <input name="" id="pw2" placeholder="确认密码" value="" type="password">
+        </div>
+        <input type="submit" value="注册" id="btn" data-theme="f">
+    </div>
+</div>
+<script>
+    $("#getcode").click(function () {
+        getAjax('http://hs.0372.cn/wap/api/Verification.ashx', {phone: $("#phone").val()}, function (result) {
+            alert(result.msg);
+        });
+    });
+    $("#btn").click(function () {
+        if ($("#pw2").val() == "") {
+            alert("密码不能为空")
+        } else {
+            if ($("#pw1").val() === $("#pw2").val()) {
+                var data = {phone: $("#phone").val(), code: $("#code").val(), nick: $("#nick").val(), pwd: base64encode($("#pw2").val() + "HuiShua0372cn") };
+                getAjax('http://hs.0372.cn/wap/api/Verification.ashx', data, function (result) {
+                    if (result.code == "0") {
+                        localStorage.setItem("id", result.id);
+                        localStorage.setItem("key", result.key);
+                        localStorage.setItem("username", result.name);
+                        localStorage.setItem("phone", result.phone);
+                    }
+                    else {
+                        alert(result.msg)
+                    }
+                });
+            } else {
+                alert("密码不一致");
+            }
+        }
+    });
+</script>
+</body>
+</html>

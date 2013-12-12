@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no, email=no">
+    <link href="css/idangerous.swiper.css" rel="stylesheet" type="text/css">
+    <link href="css/index.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<div class="section">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img src="images/main_addefault.png" height="160">
+            </div>
+        </div>
+    </div>
+    <div class="logo"></div>
+    <a href="search.html" rel="external">
+        <div class="seach">
+            商家名称
+        </div>
+    </a>
+</div>
+<div id="section">
+    <div style="float: left; width: 87%">
+        <ul class="menu">
+            <li id="coupon"><a href="couponlist.html">
+                <img src="images/main_coupons.png"/><span><p>
+                优惠券</p>
+                            </span></a></li>
+            <li id="vip"><a href="vip.html">
+                <img src="images/main_vip.png"/><span><p>
+                VIP</p>
+                            </span></a></li>
+            <li id="kadou"><a href="user/kadou.html">
+                <img src="images/main_kaodou.png"/><span><p>
+                卡兜</p>
+                            </span></a></li>
+            <li id="hd"><a href="#">
+                <img src="images/main_activity.png"/><span><p>
+                活动</p>
+                            </span></a></li>
+        </ul>
+    </div>
+    <div style="float: right;margin-right: 10px">
+        <ul class="nav">
+            <li><a href="user/index.html">
+                <img src="images/main_me.png" width="25" height="25"/></a></li>
+            <li>
+                <a href="help.html"><img src="images/main_help.png" width="25" height="25"/></a></li>
+            <li>
+                <a href="about.html"><img src="images/iabout_us.png" width="25" height="25" id="img_panel"/></a></li>
+        </ul>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/idangerous.swiper-2.2.min.js"></script>
+<script>
+    $(function () {
+        var mySwiper = $('.swiper-container').swiper({
+            mode: 'horizontal',
+            loop: true
+        });
+    });
+</script>
+</body>
+</html>

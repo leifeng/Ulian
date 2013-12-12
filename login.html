@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no, email=no">
+    <link rel="stylesheet" href="css/jquery.mobile.flatui.css">
+    <link rel="stylesheet" href="iCheck/skin/minimal/red.css">
+    <link rel="stylesheet" href="iCheck/skin/all.css">
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script src="iCheck/jquery.icheck.min.js"></script>
+    <script src="js/jquery.mobile-1.3.2.min.js"></script>
+    <script src="js/jQuery.md5.js"></script>
+    <script src="js/tool.js"></script>
+</head>
+<body>
+<!-- Home -->
+<div data-role="page" id="page1">
+    <div data-theme="a" data-role="header">
+        <a href="index.html" rel="external">首页</a>
+
+        <h3>
+            登录
+        </h3>
+
+    </div>
+    <div data-role="content">
+        <div data-role="fieldcontain">
+            <input name="" id="username" placeholder="手机号码" value="" type="text">
+        </div>
+        <div data-role="fieldcontain">
+            <input name="" id="userpwd" placeholder="密码" value="" type="password">
+        </div>
+        <div style="margin-top: 10px">
+            <div style="float: left"><input type="checkbox" class="Remember" id="Remember"></div>
+            <div style="float: left;font-size: 14px;margin-left: 10px;">记住密码</div>
+            <div style="clear: both"></div>
+        </div>
+
+        <input type="submit" value="登陆" id="btn" data-theme="f">
+        <a href="register.html" rel="external" data-role="button" data-theme="b">注册</a>
+    </div>
+</div>
+<script>
+    $(function () {
+        if (localStorage.getItem("phone")) {
+            $("#username").val(localStorage.getItem("phone"))
+        }
+        $('.Remember').iCheck({
+            checkboxClass: 'icheckbox_minimal-red',
+            radioClass: 'iradio_minimal-red'
+
+        });
+        $("#btn").click(function () {
+         //   alert($(".Remember").attr("check"));
+            var md5pwd = $.md5($("#userpwd").val() + "HuiShua0372cn");
+            var data = {phone: $("#username").val(), pwd: md5pwd};
+            getAjax('http://hs.0372.cn/wap/api/login.ashx', data, function (result) {
+                if (result.code == 0) {
+                    localStorage.setItem("id", result.id);
+                    localStorage.setItem("key", result.key);
+                    localStorage.setItem("username", result.name);
+                    localStorage.setItem("phone", result.phone);
+                    localStorage.setItem("phone", result.phone);
+
+                    if (!localStorage.getItem("url")) {
+                        location.href = "index.html";
+                    } else {
+                        location.href = localStorage.getItem("url");
+                    }
+
+                } else {
+                    alert(result.msg);
+                }
+            });
+        });
+    })
+
+</script>
+</body>
+</html>

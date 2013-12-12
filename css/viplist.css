@@ -1,0 +1,63 @@
+a:link {
+    text-decoration: none;
+}
+
+.ui-body-c, .ui-overlay-c {
+    background-image: url(../images/bg.9.jpg);
+}
+
+.ui-content {
+    padding: 10px 0px;
+}
+
+.section {
+    width: 100%;
+    margin: 10px auto;
+    overflow: hidden;
+}
+
+.section ul {
+    padding: 0;
+    margin: 0;
+}
+
+.section ul li {
+    list-style: none;
+    margin-top: 20px;
+}
+
+.section .vipbg {
+    background-image: url(../images/vip_bluebg_general.9.png);
+    background-repeat: no-repeat;
+    background-size: 100% 120px;
+    height: 110px;
+
+}
+
+.section .vipinfobg {
+    background: url(../images/vipimg_bg.png) 13% 0px;
+    background-repeat: no-repeat;
+    background-size: 90px 60px;
+    height: 90px;
+    padding-left: 14%;
+}
+
+.section .line {
+    background-image: url(../images/vip_line.png);
+    background-repeat: no-repeat;
+    width: 99%;
+    height: 14px
+}
+
+.section .vipinfo {
+    margin-left: 30px;
+    font-size: 15px;
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: none;
+    margin-top: 10px
+}
+
+.l {
+    float: left;
+}

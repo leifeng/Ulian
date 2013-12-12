@@ -1,0 +1,162 @@
+.ui-body-c, .ui-overlay-c {
+    background-color: #ffffff;
+}
+a:link{
+    text-decoration: none;
+
+}
+.list {
+    padding: 0;
+    margin: 0;
+}
+
+.list li {
+    background-color: #ffffff;
+    list-style: none;
+    margin-top: 10px;
+    border: 1px solid #bbb;
+}
+
+.clear {
+    clear: both;
+}
+
+.info {
+    float: left;
+    height: 110px;
+    color: #ffffff;
+    text-shadow: none;
+    width: 70%;
+
+}
+
+.shopname {
+    width: 90%;
+    margin: 5px auto;
+    font-weight: normal;
+}
+
+.discount {
+    width: 90%;
+    margin: 5px auto;
+    font-size: 22px;
+    font-weight: bold;
+    white-space: nowrap;
+
+}
+
+.shoptype {
+    width: 90%;
+    margin: 5px auto;
+    font-weight: normal;
+}
+
+.look {
+    color: #878481;
+    float: left;
+    height: 110px;
+    line-height: 110px;
+    background-color: white;
+    margin-left: 10px;
+}
+.look a{
+    font-size: 16px;
+    color: #000000;
+}
+.square {
+    float: left;
+    width: 12px;
+    height: 110px;
+    background-size: 15px 13px;
+    background-repeat: repeat-y;
+}
+
+.bg_red {
+    background-color: #d24161;
+}
+
+.bg_orange {
+    background-color: #e85e00;
+}
+
+.bg_yellow {
+    background-color: #F39B00;
+}
+
+.bg_green {
+    background-color: #7eab1e;
+}
+
+.bg_blue {
+    background-color: #50add3;
+}
+
+.red {
+    background-image: -webkit-gradient(linear, 0% 0%, 50% 50%, from(#d24161), color-stop(.99, #d24161), to(transparent)), -webkit-gradient(linear, 50% 50%, 0% 100%, from(transparent), color-stop(.01, #d24161), to(#d24161));
+
+}
+
+.orange {
+    background-image: -webkit-gradient(linear, 0% 0%, 50% 50%, from(#e85e00), color-stop(.99, #e85e00), to(transparent)), -webkit-gradient(linear, 50% 50%, 0% 100%, from(transparent), color-stop(.01, #e85e00), to(#e85e00));
+
+}
+
+.yellow {
+    background-image: -webkit-gradient(linear, 0% 0%, 50% 50%, from(#F39B00), color-stop(.99, #F39B00), to(transparent)), -webkit-gradient(linear, 50% 50%, 0% 100%, from(transparent), color-stop(.01, #F39B00), to(#F39B00));
+
+}
+
+.green {
+    background-image: -webkit-gradient(linear, 0% 0%, 50% 50%, from(#7eab1e), color-stop(.99, #7eab1e), to(transparent)), -webkit-gradient(linear, 50% 50%, 0% 100%, from(transparent), color-stop(.01, #7eab1e), to(#7eab1e));
+
+}
+
+.blue {
+    background-image: -webkit-gradient(linear, 0% 0%, 50% 50%, from(#50add3), color-stop(.99, #50add3), to(transparent)), -webkit-gradient(linear, 50% 50%, 0% 100%, from(transparent), color-stop(.01, #50add3), to(#50add3));
+
+}
+
+
+#result ul{
+    padding: 0;
+    margin: 0;
+}
+#result ul li{
+    list-style: none;
+    margin-top: 20px;
+}
+#result .vipbg {
+    background-image: url(../images/vip_bluebg_general.9.png);
+    background-repeat: no-repeat;
+    background-size: 100% 120px;
+    height: 110px;
+
+}
+
+#result .vipinfobg {
+    background: url(../images/vipimg_bg.png) 13% 0px;
+    background-repeat: no-repeat;
+    background-size: 90px 60px;
+    height: 90px;
+    padding-left: 13%;
+}
+
+#result .line {
+    background-image: url(../images/vip_line.png);
+    background-repeat: no-repeat;
+    width: 99%;
+    height: 14px
+}
+
+#result .vipinfo {
+    margin-left: 30px;
+    font-size: 15px;
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: none;
+    margin-top: 10px
+}
+
+#result .l {
+    float: left;
+}

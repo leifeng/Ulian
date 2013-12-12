@@ -1,0 +1,242 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no, email=no">
+    <link rel="stylesheet" href="../css/jquery.mobile.flatui.css">
+
+    <link rel="stylesheet" href="../css/list.css">
+    <style>
+
+        #vip ul {
+            padding: 0;
+            margin: 0;
+        }
+
+        #vip ul li {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        #vip .vipbg {
+            background: url(../images/vip_bluebg_general.9.png) no-repeat;
+            background-size: 100% 120px;
+            height: 110px;
+
+        }
+
+        #vip .vipinfobg {
+            background: url(../images/vipimg_bg.png) no-repeat 13% 0px;
+            background-size: 90px 60px;
+            height: 90px;
+            padding-left: 13%;
+        }
+
+        #vip .line {
+            background: url(../images/vip_line.png) no-repeat;
+            width: 99%;
+            height: 14px
+        }
+
+        #vip .vipinfo {
+            margin-left: 30px;
+            font-size: 15px;
+            color: #ffffff;
+            font-weight: bold;
+            text-shadow: none;
+            margin-top: 10px
+        }
+
+        #vip .l {
+            float: left;
+        }
+
+    </style>
+    <script src="../js/jquery-1.9.1.min.js"></script>
+    <script src="../js/jquery.mobile-1.3.2.min.js"></script>
+    <script src="../js/handlebars.js"></script>
+    <script src="../js/tool.js"></script>
+    <script>
+        localStorage.setItem("url", window.location);
+        if (!localStorage.getItem("key") || !localStorage.getItem("id") || !localStorage.getItem("phone") || !localStorage.getItem("username")) {
+            location.href = "../login.html";
+        }
+    </script>
+</head>
+<body>
+<div data-role="page" id="page1">
+    <div data-theme="a" data-role="header">
+        <a href="index.html" rel="external" data-theme="c">个人中心</a>
+
+        <h3>
+            我的优惠券
+        </h3>
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li>
+                    <a href="#page1" data-transition="fade" data-theme="b" data-icon="" class="ui-btn-active ui-state-persist">
+                        优惠券
+                    </a>
+                </li>
+                <li>
+                    <a href="#page2" data-transition="fade" data-theme="" data-icon="">
+                        会员卡
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div data-role="content">
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li>
+                    <a href="#page1" data-transition="none" data-theme="a" data-icon="star" class="Notused ui-btn-active ui-state-persist">
+                        未使用
+                    </a>
+                </li>
+                <li>
+                    <a href="#page1" data-transition="none" data-theme="a" data-icon="check" class="Effective">
+                        已使用
+                    </a>
+                </li>
+                <li>
+                    <a href="#page1" data-transition="none" data-theme="a" data-icon="delete" class="overdue">
+                        已过期
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div id="Notused">
+
+        </div>
+        <div id="Effective" style="display: none">
+
+        </div>
+        <div id="overdue" style="display: none">
+
+        </div>
+    </div>
+</div>
+
+<div data-role="page" id="page2">
+    <div data-theme="a" data-role="header">
+        <a href="index.html" rel="external" data-theme="c">个人中心</a>
+
+        <h3>
+            我的会员卡
+        </h3>
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li>
+                    <a href="#page1" data-transition="fade" data-theme="" data-icon="" id="link_counp" >
+                        优惠券
+                    </a>
+                </li>
+                <li>
+                    <a href="#page2" data-transition="fade" data-theme="b" data-icon="" class="ui-btn-active ui-state-persist">
+                        会员卡
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div data-role="content">
+
+        <div id="vip">
+            vip
+        </div>
+    </div>
+</div>
+
+<script id="list-template" type="text/x-handlebars-template">
+    {{#if item}}
+    <ul class="list">
+        {{#each item}}
+        <li><a href="../main.html?id={{id}}&type=0" rel="external">
+            <div class="{{cssClass.[0].a}} info">
+                <div class="shopname">{{bankname}}</div>
+                <div class="discount">{{bankno}}</div>
+                <div class="shoptype">{{id}}</div>
+            </div>
+            <div class="square {{cssClass.[0].b}}">
+            </div>
+            <div class="look">
+                查看详情
+            </div>
+            <div class="clear">
+            </div>
+        </a>
+        </li>
+        {{/each}}
+    </ul>
+    {{else}}
+    <div style="width:35px;margin:50px auto"><img src="../images/my_information.png" width="35" height="35"></div>
+    {{/if}}
+</script>
+<script id="vip-template" type="text/x-handlebars-template">
+    {{#if item}}
+    <ul>
+        {{#each item}}
+        <li>
+            <a href="../main.html?type=1&id={{id}}" rel="external">
+                <div class="vipbg">
+                    <div class="vipinfobg">
+                        <div class="l"><img src="{{logo}}" width="50"></div>
+                        <div class="l vipinfo">
+                            {{shopname}}<br><span style="font-weight: normal">{{info}}</span>
+                        </div>
+                    </div>
+                    <div style="clear: both"></div>
+                </div>
+                <div class="line"></div>
+            </a>
+        </li>
+        {{/each}}
+    </ul>
+    {{else}}
+    <div style="width:35px;margin:50px auto"><img src="../images/my_information.png" width="35" height="35"></div>
+    {{/if}}
+</script>
+
+<script>
+    $(function () {
+
+        getAjax('http://hs.0372.cn/wap/api/user/mycoup.ashx', {key: localStorage.getItem("key")}, function (result) {
+            if (result.code == "0") {
+                makeHtml(result.Notused, '#list-template', '#Notused');
+                makeHtml(result.Effective, '#list-template', '#Effective');
+                makeHtml(result.overdue, '#list-template', '#overdue');
+                makeHtml(result.vip, '#vip-template', '#vip');
+            }
+            else {
+                location.href = "../login.html";
+            }
+        });
+        $(".Notused").click(function () {
+            $("#overdue").hide();
+            $("#Effective").hide();
+            $("#Notused").show();
+        })
+        $(".Effective").click(function () {
+            $("#Notused").hide();
+            $("#overdue").hide();
+            $("#Effective").show();
+        })
+        $(".overdue").click(function () {
+            $("#Notused").hide();
+            $("#Effective").hide();
+            $("#overdue").show();
+        })
+        $("#link_counp").click(function () {
+            $("#overdue").hide();
+            $("#Effective").hide();
+            $("#Notused").show();
+        })
+
+    })
+
+</script>
+</body>
+</html>

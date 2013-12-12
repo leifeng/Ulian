@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no, email=no">
+
+
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/handlebars-1.1.2.js"></script>
+    <script src="js/ember-1.2.0.js"></script>
+    <script src="js/ember-data.min.js"></script>
+    <script src="js/a.js"></script>
+</head>
+<body>
+
+
+<script type="text/x-handlebars" data-template-name="application">
+    <h1>Employee System</h1>
+    {{outlet}}
+</script>
+
+<script type="text/x-handlebars" data-template-name="home">
+    <h3>
+        Employee Information</h3>
+    <ul>
+        {{#each item in content}}
+        <li>{{item}}</li>
+        {{/each}}
+    </ul>
+    <h3>
+        Employee</h3>
+    <ul>
+        {{#each employee in employees}} {{#linkTo "employee" employee}}
+        <p>
+            {{employee.name}}
+        </p>
+        {{/linkTo}} {{/each}}
+    </ul>
+</script>
+
+<script type="text/x-handlebars" data-template-name="employee">
+    <div>
+        <h3>
+            Name: {{name}}</h3>
+
+        <p>
+            Department: {{department}}
+        </p>
+
+        <p>
+            Title: {{title}}
+        </p>
+        {{#linkTo home class='btn btn-primary'}}Back{{/linkTo}}
+    </div>
+</script>
+</body>
+</html>

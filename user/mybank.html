@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no, email=no">
+    <link rel="stylesheet" href="../css/jquery.mobile.flatui.css"/>
+    <script src="../js/jquery-1.9.1.min.js"></script>
+    <script src="../js/jquery.mobile-1.3.2.min.js"></script>
+    <script src="../js/handlebars.js"></script>
+    <script src="../js/tool.js"></script>
+    <script src="../js/getdata.js"></script>
+    <script>
+        localStorage.setItem("url", window.location);
+        if (!localStorage.getItem("key") || !localStorage.getItem("id") || !localStorage.getItem("phone") || !localStorage.getItem("username")) {
+            location.href = "../login.html";
+        }
+    </script>
+    <style>
+        .cardbg {
+            background: url(../images/yinlianka_general.png) no-repeat;
+            background-size: 100% 100%;
+            width: 280px;
+            height: 190px;
+            margin: 20px auto 0px auto;
+            color: #ffffff;
+            font-weight: bold;
+            position: relative
+        }
+
+        .ico-del {
+            position: absolute;
+            top: -17px;
+            left: 245px;
+            background-image: url(../images/close_general.png);
+            height:45px ;
+            width: 45px;
+        }
+
+        .card-name {
+            position: absolute;
+            top: 22px;
+            left: 27px;
+        }
+
+        .card-num {
+            position: absolute;
+            top: 67px;
+            left: 27px;
+        }
+
+        .ico-yinlian {
+            position: absolute;
+            top: 109px;
+            left: 157px;
+            background-image: url(../images/yinliansign.png);
+            width: 110px;
+            height: 74px;
+        }
+    </style>
+</head>
+<body>
+<!-- Home -->
+<div data-role="page" id="page1">
+    <div data-theme="a" data-role="header">
+        <a href="index.html" rel="external">个人中心</a>
+
+        <h3>
+            我的银行卡
+        </h3>
+
+    </div>
+    <div data-role="content">
+        <div class="my-bank-list"></div>
+        <a href="#page2" data-role="button" data-transition="slidefade" data-icon="plus" data-theme="f">增加银行卡</a>
+    </div>
+</div>
+<div data-role="page" id="page2">
+    <div data-theme="a" data-role="header">
+        <a href="#page1" data-transition="slide">返回</a>
+
+        <h3>
+            银行选择
+        </h3>
+
+    </div>
+    <div data-role="content">
+        <div class="bank-list-div">
+        </div>
+
+    </div>
+</div>
+<div data-role="page" id="page3">
+    <div data-theme="a" data-role="header">
+        <a href="#page2" data-transition="slide">返回</a>
+
+        <h3>
+            添加<span class="bankname"></span>卡
+        </h3>
+
+    </div>
+    <div data-role="content">
+        <input name="" id="card" placeholder="输入银行卡号" value="" type="text">
+        <input type="button" value="提交" data-theme="b" id="addbank">
+    </div>
+</div>
+
+
+<div data-role="dialog" id="msg">
+    <div data-role="header">
+        <h1>您是否要删除此卡？</h1>
+    </div>
+    <div data-role="content">
+        <input type="hidden" id="cardid">
+        <a data-role="button" id="del" data-theme="d">确认</a>
+        <a href="#page1" data-role="button">取消</a>
+    </div>
+</div>
+<script id="banklist-template" type="text/x-handlebars-template">
+    <ul data-role="listview" data-inset="true">
+        {{#each item}}
+        <li><a href="#" class="banklink">{{name}}</a></li>
+        {{/each}}
+    </ul>
+
+</script>
+
+<script id="mycards-template" type="text/x-handlebars-template">
+    {{#if item}}
+    {{#each item}}
+    <a href="#msg" data="{{id}}" class="mycardlink">
+        <div class="cardbg">
+            <div class="ico-del"></div>
+            <div class="card-name">{{name}}</div>
+            <div class="card-num">{{num}}</div>
+            <div class="ico-yinlian"></div>
+        </div>
+    </a>
+    {{/each}}
+    {{/if}}
+</script>
+<script>
+    $(function () {
+        $(document).on('click', '.mycardlink', function () {
+            $("#cardid").val($(this).attr("data"));
+        });
+        $("#del").click(function () {
+            var data = {key: localStorage.getItem("key"), uid: localStorage.getItem("id"), id: $("#cardid").val(), type: "1"}
+            getAjax('http://hs.0372.cn/wap/api/user/mybank.ashx', data, function (result) {
+                getcard();
+                $("#msg").dialog("close");
+                $.mobile.changePage("#page1", { transition: "slide", changeHash: false });
+            });
+        });
+        getdata(function (q, b, c) {
+            makeHtml(b, "#banklist-template", ".bank-list-div");
+        });
+        $(".banklink").click(function () {
+            $(".bankname").text($(this).text());
+            $.mobile.changePage("#page3", { transition: "slide", changeHash: false });
+        });
+        function getcard() {
+            var data = {key: localStorage.getItem("key"), uid: localStorage.getItem("id"), type: "0"}
+            getAjax('http://hs.0372.cn/wap/api/user/mybank.ashx', data, function (result) {
+                if (result.code == "-27") {
+                    location.href = "../login.html";
+                }
+                if (result.code == "0") {
+                    makeHtml(result.list, "#mycards-template", ".my-bank-list");
+
+                }
+            });
+        }
+
+        $("#addbank").click(function () {
+            var data = {key: localStorage.getItem("key"), card: $("#card").val(), cardname: $(".bankname").text(), type: "2", uid: localStorage.getItem("id")}
+            getAjax('http://hs.0372.cn/wap/api/user/mybank.ashx', data, function (result) {
+                alert(result.msg);
+                if (result.code == "-29") {
+                    location.href = "../login.html";
+                }
+                if (result.code == "0") {
+                    getcard();
+                    $.mobile.changePage("#page1", { transition: "slide", changeHash: false });
+                }
+            });
+        });
+        getcard();
+    })
+
+
+</script>
+</body>
+</html>
